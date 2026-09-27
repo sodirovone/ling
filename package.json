@@ -8,7 +8,7 @@
     "dev": "electron-vite dev",
     "build": "electron-vite build",
     "start": "electron-vite preview",
-    "dist": "electron-vite build && electron-builder --win --x64"
+    "dist": "electron-vite build && electron-builder --win --x64 --publish never"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.2"
