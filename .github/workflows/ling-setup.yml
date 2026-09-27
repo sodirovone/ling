@@ -1,0 +1,46 @@
+# Har push'da Windows'da Ling Setup.exe yig'iladi va "Artifacts" bo'limiga qo'yiladi.
+# v bilan boshlanuvchi teg (masalan v0.2.0) qo'yilsa — Releases bo'limiga ham chiqariladi.
+name: Ling Setup.exe
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  yigish:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Ling-Setup
+          path: dist/Ling Setup.exe
+          retention-days: 30
+
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        # Release allaqachon bo'lsa — faylini yangilaymiz, bo'lmasa yaratamiz
+        run: |
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" "dist/Ling Setup.exe" --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" "dist/Ling Setup.exe" --title "Ling $GITHUB_REF_NAME" --generate-notes
+          fi

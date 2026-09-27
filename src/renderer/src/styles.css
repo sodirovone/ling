@@ -1,0 +1,115 @@
+@import 'tailwindcss';
+
+/* Fon shaffof: Nest paneli yumaloq burchakli bo'lib ko'rinsin.
+   Asosiy oyna o'z fonini komponent ichida beradi. */
+body {
+  margin: 0;
+  background: transparent;
+  color: #e8e9eb;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Skroll chiziqchalari ko'rinmasin, aylantirish ishlayveradi */
+* {
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* Aylantirish ham silliq bo'lsin */
+html,
+body,
+div {
+  scroll-behavior: smooth;
+}
+
+/* --- Animatsiyalar ---
+   Hammasi silliq: sakrash va chayqalish yo'q, harakat tez boshlanib sekin tinadi.
+   Faqat transform va opacity o'zgaradi — video karta ularni qotmasdan chizadi. */
+@theme {
+  --default-transition-duration: 240ms;
+  --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  /* Kirish: tez boshlanadi, juda sekin to'xtaydi */
+  --silliq: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Chiqish: sekin boshlanadi, tez ketadi */
+  --chiqish: cubic-bezier(0.4, 0, 0.9, 0.4);
+}
+
+@keyframes paydo {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+}
+
+@keyframes bolim {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+}
+
+@keyframes panel {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.975);
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}
+
+.anim-paydo {
+  animation: paydo 460ms var(--silliq) both;
+}
+
+.anim-bolim {
+  animation: bolim 440ms var(--silliq) both;
+}
+
+.anim-panel {
+  transform-origin: bottom left;
+  animation: panel 380ms var(--silliq) both;
+}
+
+.anim-pop {
+  animation: pop 300ms var(--silliq) both;
+}
+
+/* Bosilganda tugma sezilar-sezilmas cho'kadi va silliq qaytadi */
+@layer base {
+  button {
+    transition-property: transform, scale, background-color, color, border-radius, opacity,
+      box-shadow;
+    transition-duration: 240ms;
+    transition-timing-function: var(--silliq);
+  }
+  button:active:not(:disabled) {
+    scale: 0.97;
+    transition-duration: 140ms;
+  }
+}
+
+/* Tizimda "animatsiyani kamaytirish" yoqilgan bo'lsa — deyarli harakatsiz */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

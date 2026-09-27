@@ -1,0 +1,34 @@
+# Ling o'rnatuvchisi: npm run dist -> dist/Ling Setup.exe
+appId: uz.ling.app
+productName: Ling
+copyright: Ling
+
+directories:
+  buildResources: build
+  output: dist
+
+# O'rnatuvchiga faqat yig'ilgan kod va ikonkalar kiradi
+files:
+  - out/**
+  - build/ikonka.png
+  - build/tray.png
+  - package.json
+
+asar: true
+
+win:
+  target:
+    - target: nsis
+      arch: x64
+  icon: build/ikonka.png
+
+nsis:
+  artifactName: Ling Setup.${ext}
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Ling
+  # O'chirilganda foydalanuvchi ma'lumotlari (nusxalar, suhbatlar) saqlanib qoladi
+  deleteAppDataOnUninstall: false
