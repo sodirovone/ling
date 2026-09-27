@@ -17,7 +17,7 @@
 
 ## O'rnatish
 
-1. [Releases](../../releases) bo'limidan `Ling Setup.exe` ni yuklab oling va ishga tushiring.
+1. [Releases](../../releases) bo'limidan `Ling-Setup.exe` ni yuklab oling va ishga tushiring.
 2. O'rnatuvchi imzolanmagan, shuning uchun Windows "Windows protected your PC" deb ogohlantiradi — **More info → Run anyway** bosing.
 
 Talab: Windows 10/11 (64-bit).
@@ -56,7 +56,7 @@ Texnologiyalar: Electron, React, TypeScript, Tailwind CSS, SQLite (`node:sqlite`
 
 **Ling** is a personal Windows assistant: a clipboard history panel (**Nest**, opens from the bottom-left corner or `Ctrl + Shift + V`) and a **Chat** that uses *your own* AI subscription through the Claude Code CLI (`claude`) or the Antigravity CLI (`agy`) — no API keys. Chat can attach files, and create images, HTML and PDF. Everything is stored locally in `%APPDATA%\Ling`. The interface is in Uzbek.
 
-Download `Ling Setup.exe` from [Releases](../../releases), install at least one of the CLIs above and sign in, then check **Sozlamalar (Settings) → AI ulanishlar**.
+Download `Ling-Setup.exe` from [Releases](../../releases), install at least one of the CLIs above and sign in, then check **Sozlamalar (Settings) → AI ulanishlar**.
 
 ## Litsenziya
 
